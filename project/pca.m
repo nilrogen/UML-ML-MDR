@@ -5,22 +5,21 @@ function [W, mu] = pca(X, y, k)
   if(n>d)
     C = Xm'*Xm;
     [W,D] = eig(C);
-    % sort eigenvalues and eigenvectors
+    % sort eigenvalues/eigenvectors
     [D, i] = sort(diag(D), 'descend');
     W = W(:,i);
     % keep k components
     W = W(:,1:k);
   else
     C = Xm*Xm';
-    %C = cov(Xm');
     [W,D] = eig(C);
-    % multiply with data matrix
+    % multiply w/ data matrix
     W = Xm'*W;
     % normalize eigenvectors
     for i=1:n
       W(:,i) = W(:,i)/norm(W(:,i));
     end
-    % sort eigenvalues and eigenvectors
+    % sort eigenvalues/eigenvectors
     [D, i] = sort(diag(D), 'descend');
     W = W(:,i);
     % keep k components
