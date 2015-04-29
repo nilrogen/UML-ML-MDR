@@ -1,7 +1,7 @@
 % load function files from subfolders
 addpath (genpath ('.'));
 % read images
-[X,y,w,h] = readimages('Dataset/');
+[X,y,w,h] = readimages('Dataset');
 % n-number of samples
 % d-dimensionality
 [n,d] = size(X);
