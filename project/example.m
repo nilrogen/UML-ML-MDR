@@ -1,7 +1,7 @@
 % load function files from subfolders
 addpath (genpath ('.'));
 % read images
-[X,y,w,h] = readimages('/input/path/here');
+[X,y,w,h] = readimages('Dataset/');
 % n-number of samples
 % d-dimensionality
 [n,d] = size(X);
@@ -17,6 +17,8 @@ for i=1:min(16,n)
     colormap(jet(256));
     title(sprintf('Eigenface #%i', i));
 end
+saveas(cfg, "img.png");
+
 steps = 10:20:min(n,320);
 Q = X(1,:); % first image to reconstruct
 figure; hold on;
