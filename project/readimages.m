@@ -19,11 +19,17 @@ function [X y width height] = readimages(path_fn)
       continue; 
     end
     % for each image
-    for j=1:length(images)
+    for j=1:10%length(images)
       % get absolute path
       filename = [path_fn, filesep, subject, filesep, images{j}];
+
+
       % read image
       T = double(imread(filename));
+	  T = scale(T, [10 10]);
+	  if i == 1
+	  	imshow(T);
+	  end
       % get image info
       [height width channels] = size(T);
       % grayscale image
@@ -38,4 +44,14 @@ function [X y width height] = readimages(path_fn)
     % increment
     classIdx = classIdx + 1;
   end % for each folder.
+end
+
+% Code found at http://stackoverflow.com/questions/25674691/resize-image-without-imresize-matlab
+function img = scale(I, scale)
+	old = size(I);
+	new = max(floor(scale .* old(1:2)), 1);
+	rowi = min(round(((1:new(1))-0.5)./scale(1)+0.5), old(1));
+	coli = min(round(((1:new(2))-0.5)./scale(2)+0.5), old(2));
+
+	img = I(rowi, coli, :);
 end
