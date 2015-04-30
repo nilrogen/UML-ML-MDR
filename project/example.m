@@ -17,6 +17,7 @@ for i=1:min(16,n)
     colormap(jet(256));
     title(sprintf('Eigenface #%i', i));
 end
+
 saveas(cfg, "img.png");
 
 steps = 10:20:min(n,320);
@@ -28,7 +29,7 @@ for i=1:min(16, length(steps))
     numEvs = steps(i);
     P = project(W(:,1:numEvs), X(1,:), mu);
     R = reconstruct(W(:,1:numEvs),P,mu);
-    comp = toGrayscale(R, , h);
+    comp = toGrayscale(R, w, h);
     imshow(comp);
     title(sprintf('%i Eigenvectors', numEvs));
 end

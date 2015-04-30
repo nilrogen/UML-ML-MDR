@@ -27,14 +27,16 @@ function [X y width height] = readimages(path_fn)
       T = double(imread(filename));
       % get image info
       [height width channels] = size(T);
+
       % grayscale image
       if(channels == 3)
         T = 0.2989 * T(:,:,1) + 0.5870* T(:,:,2) + 0.1140 * T(:,:,3);
       end
 	  %normalize images to 100x100
-	  T = scale(T, [ (100.0/height) (100.0/width) ]);
+	  T = scale(T, [ (100/height) (100/width) ]);
+	  width = height = 100 ;
       % reshape -> row vector -> append w/ data matrix
-      X = [X; reshape(T,1,100*100)];
+      X = [X; reshape(T,1,height*width)];
       % append corresponding class w/ class vector
       y = [y, classIdx];
     end
