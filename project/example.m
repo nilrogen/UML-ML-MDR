@@ -28,7 +28,7 @@ for i=1:min(16, length(steps))
     numEvs = steps(i);
     P = project(W(:,1:numEvs), X(1,:), mu);
     R = reconstruct(W(:,1:numEvs),P,mu);
-    comp = toGrayscale(R, w, h);
+    comp = toGrayscale(R, , h);
     imshow(comp);
     title(sprintf('%i Eigenvectors', numEvs));
 end
