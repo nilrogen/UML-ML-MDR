@@ -6,7 +6,8 @@ addpath (genpath ('.'));
 % d-dimensionality
 [n,d] = size(X);
 % perform full pca
-[W,mu] = pca(X,y,n);
+sTset=30
+[W,mu] = pca(X(1:sTset, :),y,sTset);
 % plot
 figure; hold on;
 title('Eigenfaces');
@@ -22,8 +23,8 @@ hold off;
 steps = 10:20:min(n,320);
 figure; hold on;
 title('Reconstruction');
-imageToUse = 11;
-for i=1:min(16, length(steps))
+imageToUse = 43;%sTset + 1;
+for i=1:min(sTset, length(steps))
     numEvs = steps(i);
     P = project(W(:,1:numEvs), X(imageToUse,:), mu);
     R = reconstruct(W(:,1:numEvs),P,mu);
@@ -31,5 +32,8 @@ for i=1:min(16, length(steps))
     imshow(comp);
     title(sprintf('%i Eigenvectors', numEvs));
 end
+
 hold off;
+%ds = sum(W); 
+%imshow(ds);
 
