@@ -19,7 +19,7 @@ function [X y width height] = readimages(path_fn)
       continue; 
     end
     % for each image
-    for j=1:10%length(images)
+    for j=1:length(images)
       % get absolute path
       filename = [path_fn, filesep, subject, filesep, images{j}];
 
@@ -33,7 +33,7 @@ function [X y width height] = readimages(path_fn)
         T = 0.2989 * T(:,:,1) + 0.5870* T(:,:,2) + 0.1140 * T(:,:,3);
       end
 	  %normalize images to 100x100
-	  T = scale(T, [ (100/height) (100/width) ]);
+	  T = scale(T, [ (100/(height-.5)) (100/(width-.5)) ]);
 	  width = height = 100 ;
       % reshape -> row vector -> append w/ data matrix
       X = [X; reshape(T,1,height*width)];

@@ -17,20 +17,19 @@ for i=1:min(16,n)
     colormap(jet(256));
     title(sprintf('Eigenface #%i', i));
 end
-
-saveas(cfg, "img.png");
+hold off;
 
 steps = 10:20:min(n,320);
-Q = X(1,:); % first image to reconstruct
 figure; hold on;
 title('Reconstruction');
+imageToUse = 11;
 for i=1:min(16, length(steps))
-    subplot(4,4,i);
     numEvs = steps(i);
-    P = project(W(:,1:numEvs), X(1,:), mu);
+    P = project(W(:,1:numEvs), X(imageToUse,:), mu);
     R = reconstruct(W(:,1:numEvs),P,mu);
     comp = toGrayscale(R, w, h);
     imshow(comp);
     title(sprintf('%i Eigenvectors', numEvs));
 end
-pause;
+hold off;
+
